@@ -1,0 +1,516 @@
+sh.c:1:2: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘.’ token
+ h.c - original source code for the Sixth Edition (V6) UNIX Thompson shell
+  ^
+sh.c:94:14: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘{’ token
+ char *mesg[] {
+              ^
+sh.c:127:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ main(c, av)
+ ^
+sh.c: In function ‘main’:
+sh.c:131:11: warning: type defaults to ‘int’ in declaration of ‘f’ [-Wimplicit-int]
+  register f;
+           ^
+sh.c:135:3: warning: implicit declaration of function ‘close’ [-Wimplicit-function-declaration]
+   close(f);
+   ^
+sh.c:136:8: warning: implicit declaration of function ‘dup’ [-Wimplicit-function-declaration]
+  if((f=dup(1)) != 2)
+        ^
+sh.c:138:9: warning: implicit declaration of function ‘getpid’ [-Wimplicit-function-declaration]
+  dolc = getpid();
+         ^
+sh.c:140:10: warning: implicit declaration of function ‘ldiv’ [-Wimplicit-function-declaration]
+   dolc = ldiv(0, dolc, 10);
+          ^
+sh.c:146:13: warning: implicit declaration of function ‘getuid’ [-Wimplicit-function-declaration]
+  if(((uid = getuid())&0377) == 0)
+             ^
+sh.c:148:10: warning: implicit declaration of function ‘open’ [-Wimplicit-function-declaration]
+  acctf = open(acname, 1);
+          ^
+sh.c:161:5: warning: implicit declaration of function ‘prs’ [-Wimplicit-function-declaration]
+     prs(v[1]);
+     ^
+sh.c:162:5: warning: implicit declaration of function ‘err’ [-Wimplicit-function-declaration]
+     err(": cannot open");
+     ^
+sh.c:168:3: warning: implicit declaration of function ‘signal’ [-Wimplicit-function-declaration]
+   signal(QUIT, 1);
+   ^
+sh.c:177:10: warning: implicit declaration of function ‘getc’ [-Wimplicit-function-declaration]
+  peekc = getc();
+          ^
+sh.c:178:2: warning: implicit declaration of function ‘main1’ [-Wimplicit-function-declaration]
+  main1();
+  ^
+sh.c: At top level:
+sh.c:182:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ main1()
+ ^
+sh.c: In function ‘main1’:
+sh.c:185:12: warning: type defaults to ‘int’ in declaration of ‘t’ [-Wimplicit-int]
+  register *t;
+            ^
+sh.c:195:3: warning: implicit declaration of function ‘word’ [-Wimplicit-function-declaration]
+   word();
+   ^
+sh.c:201:4: warning: implicit declaration of function ‘setexit’ [-Wimplicit-function-declaration]
+    setexit();
+    ^
+sh.c:203:5: warning: ‘return’ with no value, in function returning non-void
+     return;
+     ^
+sh.c:204:8: warning: implicit declaration of function ‘syntax’ [-Wimplicit-function-declaration]
+    t = syntax(args, argp);
+        ^
+sh.c:204:6: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+    t = syntax(args, argp);
+      ^
+sh.c:208:4: warning: implicit declaration of function ‘execute’ [-Wimplicit-function-declaration]
+    execute(t);
+    ^
+sh.c: At top level:
+sh.c:212:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ word()
+ ^
+sh.c: In function ‘word’:
+sh.c:228:12: warning: implicit declaration of function ‘readc’ [-Wimplicit-function-declaration]
+   while((c=readc()) != c1) {
+            ^
+sh.c:232:5: warning: ‘return’ with no value, in function returning non-void
+     return;
+     ^
+sh.c:249:3: warning: ‘return’ with no value, in function returning non-void
+   return;
+   ^
+sh.c:257:6: warning: implicit declaration of function ‘any’ [-Wimplicit-function-declaration]
+   if(any(c, " '\"\t;&<>()|^\n")) {
+      ^
+sh.c:262:4: warning: ‘return’ with no value, in function returning non-void
+    return;
+    ^
+sh.c: At top level:
+sh.c:268:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ tree(n)
+ ^
+sh.c: In function ‘tree’:
+sh.c:271:12: warning: type defaults to ‘int’ in declaration of ‘t’ [-Wimplicit-int]
+  register *t;
+            ^
+sh.c:274:8: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+  treep =+ n;
+        ^
+sh.c:278:3: warning: implicit declaration of function ‘reset’ [-Wimplicit-function-declaration]
+   reset();
+   ^
+sh.c:280:8: warning: return makes integer from pointer without a cast [-Wint-conversion]
+  return(t);
+        ^
+sh.c: At top level:
+sh.c:283:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ getc()
+ ^
+sh.c: In function ‘getc’:
+sh.c:293:8: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   argp =- 10;
+        ^
+sh.c:295:8: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   argp =+ 10;
+        ^
+sh.c:301:9: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   linep =- 10;
+         ^
+sh.c:303:9: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   linep =+ 10;
+         ^
+sh.c:309:5: error: ‘dolp’ undeclared (first use in this function)
+  if(dolp) {
+     ^
+sh.c:309:5: note: each undeclared identifier is reported only once for each function it appears in
+sh.c: At top level:
+sh.c:337:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ readc()
+ ^
+sh.c: In function ‘readc’:
+sh.c:340:11: warning: type defaults to ‘int’ in declaration of ‘c’ [-Wimplicit-int]
+  register c;
+           ^
+sh.c:343:14: warning: comparison between pointer and integer
+   if (arginp == 1)
+              ^
+sh.c:344:4: warning: implicit declaration of function ‘exit’ [-Wimplicit-function-declaration]
+    exit();
+    ^
+sh.c:344:4: warning: incompatible implicit declaration of built-in function ‘exit’
+sh.c:344:4: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+sh.c:344:4: error: too few arguments to function ‘exit’
+sh.c:346:11: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+    arginp = 1;
+           ^
+sh.c:352:3: warning: incompatible implicit declaration of built-in function ‘exit’
+   exit();
+   ^
+sh.c:352:3: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+sh.c:352:3: error: too few arguments to function ‘exit’
+sh.c:353:5: warning: implicit declaration of function ‘read’ [-Wimplicit-function-declaration]
+  if(read(0, &cc, 1) != 1)
+     ^
+sh.c:354:3: warning: incompatible implicit declaration of built-in function ‘exit’
+   exit();
+   ^
+sh.c:354:3: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+sh.c:354:3: error: too few arguments to function ‘exit’
+sh.c: At top level:
+sh.c:366:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ syntax(p1, p2)
+ ^
+sh.c: In function ‘syntax’:
+sh.c:373:11: warning: implicit declaration of function ‘syn1’ [-Wimplicit-function-declaration]
+    return(syn1(p1, p2));
+           ^
+sh.c: At top level:
+sh.c:385:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ syn1(p1, p2)
+ ^
+sh.c: In function ‘syn1’:
+sh.c:389:12: warning: type defaults to ‘int’ in declaration of ‘t’ [-Wimplicit-int]
+  register *t, *t1;
+            ^
+sh.c:389:16: warning: type defaults to ‘int’ in declaration of ‘t1’ [-Wimplicit-int]
+  register *t, *t1;
+                ^
+sh.c:411:6: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+    t = tree(4);
+      ^
+sh.c:413:14: warning: implicit declaration of function ‘syn2’ [-Wimplicit-function-declaration]
+    t[DLEF] = syn2(p1, p);
+              ^
+sh.c:416:8: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     t1 = t[DLEF];
+        ^
+sh.c:417:15: error: expected expression before ‘|’ token
+     t1[DFLG] =| FAND|FPRS|FINT;
+               ^
+sh.c:420:10: warning: return makes integer from pointer without a cast [-Wint-conversion]
+    return(t);
+          ^
+sh.c: At top level:
+sh.c:434:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ syn2(p1, p2)
+ ^
+sh.c: In function ‘syn2’:
+sh.c:455:6: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+    t = tree(4);
+      ^
+sh.c:457:14: warning: implicit declaration of function ‘syn3’ [-Wimplicit-function-declaration]
+    t[DLEF] = syn3(p1, p);
+              ^
+sh.c:460:10: warning: return makes integer from pointer without a cast [-Wint-conversion]
+    return(t);
+          ^
+sh.c: At top level:
+sh.c:472:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ syn3(p1, p2)
+ ^
+sh.c: In function ‘syn3’:
+sh.c:477:12: warning: type defaults to ‘int’ in declaration of ‘t’ [-Wimplicit-int]
+  register *t;
+            ^
+sh.c:482:8: error: expected expression before ‘|’ token
+   flg =| FPAR;
+        ^
+sh.c:510:9: error: expected expression before ‘|’ token
+    flg =| FCAT; else
+         ^
+sh.c:525:7: warning: assignment makes integer from pointer without a cast [-Wint-conversion]
+     i = *p;
+       ^
+sh.c:530:6: warning: assignment makes integer from pointer without a cast [-Wint-conversion]
+    o = *p;
+      ^
+sh.c:541:5: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   t = tree(5);
+     ^
+sh.c:549:4: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+  t = tree(n+5);
+    ^
+sh.c:552:13: warning: assignment makes integer from pointer without a cast [-Wint-conversion]
+   t[l+DCOM] = p1[l];
+             ^
+sh.c:557:8: warning: return makes integer from pointer without a cast [-Wint-conversion]
+  return(t);
+        ^
+sh.c: At top level:
+sh.c:560:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ scan(at, f)
+ ^
+sh.c: In function ‘scan’:
+sh.c:565:12: warning: type defaults to ‘int’ in declaration of ‘t’ [-Wimplicit-int]
+  register *t;
+            ^
+sh.c:568:10: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+  while(p = *t++)
+          ^
+sh.c: At top level:
+sh.c:573:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ tglob(c)
+ ^
+sh.c:582:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ trim(c)
+ ^
+sh.c:589:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ execute(t, pf1, pf2)
+ ^
+sh.c: In function ‘execute’:
+sh.c:593:12: warning: type defaults to ‘int’ in declaration of ‘t1’ [-Wimplicit-int]
+  register *t1;
+            ^
+sh.c:595:9: warning: type defaults to ‘int’ in declaration of ‘errno’ [-Wimplicit-int]
+  extern errno;
+         ^
+sh.c:601:7: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   cp1 = t[DCOM];
+       ^
+sh.c:602:6: warning: implicit declaration of function ‘equal’ [-Wimplicit-function-declaration]
+   if(equal(cp1, "chdir")) {
+      ^
+sh.c:604:8: warning: implicit declaration of function ‘chdir’ [-Wimplicit-function-declaration]
+     if(chdir(t[DCOM+1]) < 0)
+        ^
+sh.c:608:4: warning: ‘return’ with no value, in function returning non-void
+    return;
+    ^
+sh.c:613:5: warning: ‘return’ with no value, in function returning non-void
+     return;
+     ^
+sh.c:618:4: warning: ‘return’ with no value, in function returning non-void
+    return;
+    ^
+sh.c:623:5: warning: implicit declaration of function ‘execv’ [-Wimplicit-function-declaration]
+     execv("/bin/login", t+DCOM);
+     ^
+sh.c:626:4: warning: ‘return’ with no value, in function returning non-void
+    return;
+    ^
+sh.c:634:4: warning: ‘return’ with no value, in function returning non-void
+    return;
+    ^
+sh.c:637:4: warning: implicit declaration of function ‘pwait’ [-Wimplicit-function-declaration]
+    pwait(-1, 0);
+    ^
+sh.c:638:4: warning: ‘return’ with no value, in function returning non-void
+    return;
+    ^
+sh.c:641:4: warning: ‘return’ with no value, in function returning non-void
+    return;
+    ^
+sh.c:647:8: warning: implicit declaration of function ‘fork’ [-Wimplicit-function-declaration]
+    i = fork();
+        ^
+sh.c:650:4: warning: ‘return’ with no value, in function returning non-void
+    return;
+    ^
+sh.c:658:5: warning: implicit declaration of function ‘prn’ [-Wimplicit-function-declaration]
+     prn(i);
+     ^
+sh.c:662:5: warning: ‘return’ with no value, in function returning non-void
+     return;
+     ^
+sh.c:665:4: warning: ‘return’ with no value, in function returning non-void
+    return;
+    ^
+sh.c:673:5: warning: incompatible implicit declaration of built-in function ‘exit’
+     exit();
+     ^
+sh.c:673:5: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+sh.c:673:5: error: too few arguments to function ‘exit’
+sh.c:680:6: warning: implicit declaration of function ‘seek’ [-Wimplicit-function-declaration]
+      seek(i, 0, 2);
+      ^
+sh.c:684:8: warning: implicit declaration of function ‘creat’ [-Wimplicit-function-declaration]
+    i = creat(t[DRIT], 0666);
+        ^
+sh.c:688:5: warning: incompatible implicit declaration of built-in function ‘exit’
+     exit();
+     ^
+sh.c:688:5: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+sh.c:688:5: error: too few arguments to function ‘exit’
+sh.c:716:10: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+    if(t1 = t[DSPR])
+          ^
+sh.c:717:15: error: expected expression before ‘|’ token
+     t1[DFLG] =| f&FINT;
+               ^
+sh.c:719:4: warning: incompatible implicit declaration of built-in function ‘exit’
+    exit();
+    ^
+sh.c:719:4: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+sh.c:719:4: error: too few arguments to function ‘exit’
+sh.c:725:12: warning: assignment makes integer from pointer without a cast [-Wint-conversion]
+    t[DSPR] = "/etc/glob";
+            ^
+sh.c:728:4: warning: incompatible implicit declaration of built-in function ‘exit’
+    exit();
+    ^
+sh.c:728:4: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+sh.c:728:4: error: too few arguments to function ‘exit’
+sh.c:732:3: warning: implicit declaration of function ‘texec’ [-Wimplicit-function-declaration]
+   texec(t[DCOM], t);
+   ^
+sh.c:737:7: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   cp2 = t[DCOM];
+       ^
+sh.c:743:3: warning: incompatible implicit declaration of built-in function ‘exit’
+   exit();
+   ^
+sh.c:743:3: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+sh.c:743:3: error: too few arguments to function ‘exit’
+sh.c:747:3: warning: implicit declaration of function ‘pipe’ [-Wimplicit-function-declaration]
+   pipe(pv);
+   ^
+sh.c:748:6: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   t1 = t[DLEF];
+      ^
+sh.c:749:13: error: expected expression before ‘|’ token
+   t1[DFLG] =| FPOU | (f&(FPIN|FINT|FPRS));
+             ^
+sh.c:751:6: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   t1 = t[DRIT];
+      ^
+sh.c:752:13: error: expected expression before ‘|’ token
+   t1[DFLG] =| FPIN | (f&(FPOU|FINT|FAND|FPRS));
+             ^
+sh.c:754:3: warning: ‘return’ with no value, in function returning non-void
+   return;
+   ^
+sh.c:758:9: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   if(t1 = t[DLEF])
+         ^
+sh.c:759:14: error: expected expression before ‘|’ token
+    t1[DFLG] =| f;
+              ^
+sh.c:761:9: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   if(t1 = t[DRIT])
+         ^
+sh.c:762:14: error: expected expression before ‘|’ token
+    t1[DFLG] =| f;
+              ^
+sh.c:764:3: warning: ‘return’ with no value, in function returning non-void
+   return;
+   ^
+sh.c: At top level:
+sh.c:769:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ texec(f, at)
+ ^
+sh.c: In function ‘texec’:
+sh.c:769:1: warning: type of ‘f’ defaults to ‘int’ [-Wimplicit-int]
+sh.c:772:9: warning: type defaults to ‘int’ in declaration of ‘errno’ [-Wimplicit-int]
+  extern errno;
+         ^
+sh.c:779:12: warning: assignment makes integer from pointer without a cast [-Wint-conversion]
+    t[DCOM] = linep;
+            ^
+sh.c:780:11: warning: assignment makes integer from pointer without a cast [-Wint-conversion]
+   t[DSPR] = "/bin/sh";
+           ^
+sh.c:783:3: warning: incompatible implicit declaration of built-in function ‘exit’
+   exit();
+   ^
+sh.c:783:3: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+sh.c:783:3: error: too few arguments to function ‘exit’
+sh.c:788:3: warning: incompatible implicit declaration of built-in function ‘exit’
+   exit();
+   ^
+sh.c:788:3: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+sh.c:788:3: error: too few arguments to function ‘exit’
+sh.c: At top level:
+sh.c:792:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ err(s)
+ ^
+sh.c: In function ‘err’:
+sh.c:800:3: warning: incompatible implicit declaration of built-in function ‘exit’
+   exit();
+   ^
+sh.c:800:3: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+sh.c:800:3: error: too few arguments to function ‘exit’
+sh.c: At top level:
+sh.c:804:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ prs(as)
+ ^
+sh.c: In function ‘prs’:
+sh.c:811:3: warning: implicit declaration of function ‘putc’ [-Wimplicit-function-declaration]
+   putc(*s++);
+   ^
+sh.c: At top level:
+sh.c:814:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ putc(c)
+ ^
+sh.c: In function ‘putc’:
+sh.c:814:1: warning: type of ‘c’ defaults to ‘int’ [-Wimplicit-int]
+sh.c:814:1: warning: number of arguments doesn’t match built-in prototype
+sh.c:817:2: warning: implicit declaration of function ‘write’ [-Wimplicit-function-declaration]
+  write(2, &c, 1);
+  ^
+sh.c: At top level:
+sh.c:820:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ prn(n)
+ ^
+sh.c: In function ‘prn’:
+sh.c:823:11: warning: type defaults to ‘int’ in declaration of ‘a’ [-Wimplicit-int]
+  register a;
+           ^
+sh.c:827:7: warning: implicit declaration of function ‘lrem’ [-Wimplicit-function-declaration]
+  putc(lrem(0,n,10)+'0');
+       ^
+sh.c: At top level:
+sh.c:830:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ any(c, as)
+ ^
+sh.c:843:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ equal(as1, as2)
+ ^
+sh.c:856:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ pwait(i, t)
+ ^
+sh.c: In function ‘pwait’:
+sh.c:859:11: warning: type defaults to ‘int’ in declaration of ‘p’ [-Wimplicit-int]
+  register p, e;
+           ^
+sh.c:859:14: warning: type defaults to ‘int’ in declaration of ‘e’ [-Wimplicit-int]
+  register p, e;
+              ^
+sh.c:864:3: warning: implicit declaration of function ‘times’ [-Wimplicit-function-declaration]
+   times(&timeb);
+   ^
+sh.c:865:3: warning: implicit declaration of function ‘time’ [-Wimplicit-function-declaration]
+   time(timeb.proct);
+   ^
+sh.c:866:7: warning: implicit declaration of function ‘wait’ [-Wimplicit-function-declaration]
+   p = wait(&s);
+       ^
+sh.c:870:6: error: ‘mesg’ undeclared (first use in this function)
+   if(mesg[e] != 0) {
+      ^
+sh.c:882:4: warning: implicit declaration of function ‘acct’ [-Wimplicit-function-declaration]
+    acct(t);
+    ^
+sh.c: At top level:
+sh.c:889:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ acct(t)
+ ^
+sh.c: In function ‘acct’:
+sh.c:893:3: warning: implicit declaration of function ‘enacct’ [-Wimplicit-function-declaration]
+   enacct("**gok"); else
+   ^
+sh.c: At top level:
+sh.c:899:1: warning: return type defaults to ‘int’ [-Wimplicit-int]
+ enacct(as)
+ ^
+sh.c: In function ‘enacct’:
+sh.c:912:11: warning: type defaults to ‘int’ in declaration of ‘i’ [-Wimplicit-int]
+  register i;
+           ^
+sh.c:918:2: warning: implicit declaration of function ‘lsub’ [-Wimplicit-function-declaration]
+  lsub(tbuf.realt, timbuf.proct, timeb.proct);
+  ^
