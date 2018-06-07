@@ -5,11 +5,16 @@ cc := gcc
 src = $(wildcard *.c)
 objs = $(patsubst  *.c,*.o,$(src))
 
+cflags += -std=c99
+ifeq ($(v), d)
+cflags += -g
+endif
+
 $(target): $(objs)
-	$(cc) -o $@ $(objs)
+	$(cc) -o $@ $(cflags) $(objs)
 
 %.o:%.c
-	$(cc) -c -o $@ $<
+	$(cc) -c -o $(cflags) $@ $<
 
 .PHONY: clean
 
