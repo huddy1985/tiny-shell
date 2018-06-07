@@ -1,4 +1,5 @@
-h.c - original source code for the Sixth Edition (V6) UNIX Thompson shell
+/*
+ * sh.c - original source code for the Sixth Edition (V6) UNIX Thompson shell
  *
  *	From: Sixth Edition (V6) UNIX /usr/source/s2/sh.c
  *
@@ -39,9 +40,17 @@ h.c - original source code for the Sixth Edition (V6) UNIX Thompson shell
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <errno.h>
+
 /*
  */
+
+#include <stdlib.h>
 
 #define	INTR	2
 #define	QUIT	3
@@ -91,7 +100,7 @@ char	setintr;
 char	*arginp;
 int	onelflg;
 
-char	*mesg[] {
+char *mesg[] = {
 	0,
 	"Hangup",
 	0,
@@ -124,12 +133,25 @@ char	line[LINSIZ];
 char	*args[ARGSIZ];
 int	trebuf[TRESIZ];
 
-main(c, av)
-int c;
-char **av;
+void prs(char *as);
+void err(char *s);
+int getc();
+void main1();
+void word();
+char *syntax(char **p1, char **p2);
+void execute(int *t, int *pf1, int *pf2);
+void lsub(int *save, int *from, int *subto);
+
+void sig_handler(int signumber)
 {
-	register f;
+	prs("sigaction");
+}
+
+int main(int c, char **av)
+{
+	register int f;
 	register char *acname, **v;
+	register char rem;
 
 	for(f=2; f<15; f++)
 		close(f);
@@ -137,8 +159,9 @@ char **av;
 		close(f);
 	dolc = getpid();
 	for(f=4; f>=0; f--) {
-		dolc = ldiv(0, dolc, 10);
-		pidp[f] = ldivr+'0';
+		rem = dolc % 10;
+		pidp[f] = rem + '0';
+		dolc = dolc/10;
 	}
 	v = av;
 	acname = "/usr/adm/sha";
@@ -165,8 +188,8 @@ char **av;
 	}
 	if(**v == '-') {
 		setintr++;
-		signal(QUIT, 1);
-		signal(INTR, 1);
+		signal(QUIT, sig_handler);
+		signal(INTR, sig_handler);
 	}
 	dolv = v+1;
 	dolc = c-1;
@@ -179,7 +202,7 @@ loop:
 	goto loop;
 }
 
-main1()
+void main1()
 {
 	register char c, *cp;
 	register *t;
@@ -198,18 +221,18 @@ main1()
 	treeend = &trebuf[TRESIZ];
 	if(gflg == 0) {
 		if(error == 0) {
-			setexit();
+			// setexit(-1);
 			if (error)
 				return;
 			t = syntax(args, argp);
 		}
 		if(error != 0)
 			err("syntax error"); else
-			execute(t);
+			execute(t, NULL, NULL);
 	}
 }
 
-word()
+void word()
 {
 	register char c, c1;
 
@@ -271,7 +294,7 @@ int n;
 	register *t;
 
 	t = treep;
-	treep =+ n;
+	treep += n;
 	if (treep>treeend) {
 		prs("Command line overflow\n");
 		error++;
@@ -280,7 +303,7 @@ int n;
 	return(t);
 }
 
-getc()
+int getc()
 {
 	register char c;
 
@@ -290,17 +313,17 @@ getc()
 		return(c);
 	}
 	if(argp > eargp) {
-		argp =- 10;
+		argp -= 10;
 		while((c=getc()) != '\n');
-		argp =+ 10;
+		argp += 10;
 		err("Too many args");
 		gflg++;
 		return(c);
 	}
 	if(linep > elinep) {
-		linep =- 10;
+		linep -= 10;
 		while((c=getc()) != '\n');
-		linep =+ 10;
+		linep += 10;
 		err("Too many characters");
 		gflg++;
 		return(c);
@@ -341,7 +364,7 @@ readc()
 
 	if (arginp) {
 		if (arginp == 1)
-			exit();
+			exit(-1);
 		if ((c = *arginp++) == 0) {
 			arginp = 1;
 			c = '\n';
@@ -349,9 +372,9 @@ readc()
 		return(c);
 	}
 	if (onelflg==1)
-		exit();
+		exit(-1);
 	if(read(0, &cc, 1) != 1)
-		exit();
+		exit(-1);
 	if (cc=='\n' && onelflg)
 		onelflg--;
 	return(cc);
@@ -363,8 +386,7 @@ readc()
  *	syn1
  */
 
-syntax(p1, p2)
-char **p1, **p2;
+char *syntax(char **p1, char **p2)
 {
 
 	while(p1 != p2) {
@@ -414,7 +436,7 @@ char **p1, **p2;
 			t[DFLG] = 0;
 			if(l == '&') {
 				t1 = t[DLEF];
-				t1[DFLG] =| FAND|FPRS|FINT;
+				t1[DFLG] |= FAND|FPRS|FINT;
 			}
 			t[DRIT] = syntax(p+1, p2);
 			return(t);
@@ -479,7 +501,7 @@ char **p1, **p2;
 
 	flg = 0;
 	if(**p2 == ')')
-		flg =| FPAR;
+		flg |= FPAR;
 	lp = 0;
 	rp = 0;
 	i = 0;
@@ -507,7 +529,7 @@ char **p1, **p2;
 	case '>':
 		p++;
 		if(p!=p2 && **p=='>')
-			flg =| FCAT; else
+			flg |= FCAT; else
 			p--;
 
 	case '<':
@@ -586,8 +608,7 @@ int c;
 	return(c&0177);
 }
 
-execute(t, pf1, pf2)
-int *t, *pf1, *pf2;
+void execute(int *t, int *pf1, int *pf2)
 {
 	int i, f, pv[2];
 	register *t1;
@@ -670,14 +691,14 @@ int *t, *pf1, *pf2;
 			if(i < 0) {
 				prs(t[DLEF]);
 				err(": cannot open");
-				exit();
+				exit(-1);
 			}
 		}
 		if(t[DRIT] != 0) {
 			if((f&FCAT) != 0) {
 				i = open(t[DRIT], 1);
 				if(i >= 0) {
-					seek(i, 0, 2);
+					lseek(i, 0, 2);
 					goto f1;
 				}
 			}
@@ -685,7 +706,7 @@ int *t, *pf1, *pf2;
 			if(i < 0) {
 				prs(t[DRIT]);
 				err(": cannot create");
-				exit();
+				exit(-1);
 			}
 		f1:
 			close(1);
@@ -714,9 +735,9 @@ int *t, *pf1, *pf2;
 		}
 		if(t[DTYP] == TPAR) {
 			if(t1 = t[DSPR])
-				t1[DFLG] =| f&FINT;
-			execute(t1);
-			exit();
+				t1[DFLG] |= f&FINT;
+			execute(t1, NULL, NULL);
+			exit(-1);
 		}
 		close(acctf);
 		gflg = 0;
@@ -725,7 +746,7 @@ int *t, *pf1, *pf2;
 			t[DSPR] = "/etc/glob";
 			execv(t[DSPR], t+DSPR);
 			prs("glob: cannot execute\n");
-			exit();
+			exit(-1);
 		}
 		scan(t, &trim);
 		*linep = 0;
@@ -740,27 +761,27 @@ int *t, *pf1, *pf2;
 		texec(linep, t);
 		prs(t[DCOM]);
 		err(": not found");
-		exit();
+		exit(-1);
 
 	case TFIL:
 		f = t[DFLG];
 		pipe(pv);
 		t1 = t[DLEF];
-		t1[DFLG] =| FPOU | (f&(FPIN|FINT|FPRS));
+		t1[DFLG] |= FPOU | (f&(FPIN|FINT|FPRS));
 		execute(t1, pf1, pv);
 		t1 = t[DRIT];
-		t1[DFLG] =| FPIN | (f&(FPOU|FINT|FAND|FPRS));
+		t1[DFLG] |= FPIN | (f&(FPOU|FINT|FAND|FPRS));
 		execute(t1, pv, pf2);
 		return;
 
 	case TLST:
 		f = t[DFLG]&FINT;
 		if(t1 = t[DLEF])
-			t1[DFLG] =| f;
-		execute(t1);
+			t1[DFLG] |= f;
+		execute(t1, NULL, NULL);
 		if(t1 = t[DRIT])
-			t1[DFLG] =| f;
-		execute(t1);
+			t1[DFLG] |= f;
+		execute(t1, NULL, NULL);
 		return;
 
 	}
@@ -780,29 +801,27 @@ int *at;
 		t[DSPR] = "/bin/sh";
 		execv(t[DSPR], t+DSPR);
 		prs("No shell!\n");
-		exit();
+		exit(-1);
 	}
 	if (errno==ENOMEM) {
 		prs(t[DCOM]);
 		err(": too large");
-		exit();
+		exit(-1);
 	}
 }
 
-err(s)
-char *s;
+void err(char *s)
 {
 
 	prs(s);
 	prs("\n");
 	if(promp == 0) {
-		seek(0, 0, 2);
-		exit();
+		lseek(0, 0, 2);
+		exit(-1);
 	}
 }
 
-prs(as)
-char *as;
+void prs(char *as)
 {
 	register char *s;
 
@@ -821,10 +840,11 @@ prn(n)
 int n;
 {
 	register a;
+	a = n / 10;
 
-	if(a=ldiv(0,n,10))
+	if(a)
 		prn(a);
-	putc(lrem(0,n,10)+'0');
+	putc((n % 10) +'0');
 }
 
 any(c, as)
@@ -886,8 +906,7 @@ int i, *t;
 	}
 }
 
-acct(t)
-int *t;
+acct(int *t)
 {
 	if(t == 0)
 		enacct("**gok"); else
@@ -934,6 +953,21 @@ char *as;
 	tbuf.shf = 0;
 	if (promp==0)
 		tbuf.shf = 1;
-	seek(acctf, 0, 2);
+	lseek(acctf, 0, 2);
 	write(acctf, &tbuf, sizeof(tbuf));
+}
+
+void reset()
+{
+	for (int i = 0; i < 100; ++i)
+		trebuf[i] = '\0';
+
+	treep = trebuf;
+	treeend = &trebuf[TRESIZ];
+}
+	
+void lsub(int *save, int *from, int *subto)
+{
+	save[0] = from[0] - subto[0];
+	save[1] = from[1] - subto[1];
 }
